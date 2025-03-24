@@ -146,7 +146,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Login/Logout settings
 LOGIN_REDIRECT_URL = '/'  # Redirect to home page after login
 LOGOUT_REDIRECT_URL = '/'  # Redirect to home page after logout
-LOGIN_URL = 'blog/login/'  # Login page URL
+LOGIN_URL = '/blog/login/'  # Login page URL
 
 # For password reset feature
 DEFAULT_FROM_EMAIL = 'noreply@blogsite.com'
