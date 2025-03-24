@@ -59,7 +59,7 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
         return redirect('blog:blog-detail', pk=self.kwargs['pk'])
 
     def get_login_url(self):
-        return '/accounts/login/' 
+        return '/blog/login/' 
 
 from django.contrib.auth import logout
 from django.shortcuts import redirect
