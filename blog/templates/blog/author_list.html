@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bloggers-container">
+    <h2>Our Bloggers</h2>
+    
+    {% if authors %}
+        <div class="bloggers-grid">
+            {% for author in authors %}
+                <div class="blogger-card">
+                    <h3>
+                        <a href="{% url 'blog:author-detail' author.pk %}">{{ author.user.username }}</a>
+                    </h3>
+                    <div class="blogger-bio">
+                        {{ author.bio|truncatewords:30|default:"No bio available." }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="no-bloggers">No bloggers available.</p>
+    {% endif %}
+</div>
+{% endblock %}

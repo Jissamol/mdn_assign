@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="home-content">
+    <h1>Welcome to Our Blog Site</h1>
+    <div class="site-description">
+        <p>This is a community-driven blog platform where writers can share their thoughts, ideas, and experiences with the world. Here you can:</p>
+        <ul>
+            <li>Read interesting blog posts from various authors</li>
+            <li>Discover new bloggers and their unique perspectives</li>
+            <li>Engage in discussions through comments</li>
+            <li>Share your own thoughts and stories</li>
+        </ul>
+    </div>
+
+    <div class="quick-links">
+        <h2>Quick Links</h2>
+        <div class="link-grid">
+            <a href="{% url 'blog:blog-list' %}" class="quick-link">
+                <h3>Latest Blog Posts</h3>
+                <p>Read the most recent articles from our community</p>
+            </a>
+            <a href="{% url 'blog:author-list' %}" class="quick-link">
+                <h3>Our Bloggers</h3>
+                <p>Meet the writers behind the content</p>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %} 

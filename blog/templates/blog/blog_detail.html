@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ post.title }}</h2>
+<p><strong>Author:</strong> 
+    {% if post.author %}
+        <a href="{% url 'blog:author-detail' post.author.pk %}">{{ post.author.user.username }}</a>
+    {% else %}
+        Unknown Author
+    {% endif %}
+</p>
+<p><strong>Published on:</strong> {{ post.post_date }}</p>
+<hr>
+<p>{{ post.content }}</p>
+
+{% if user.is_authenticated and user == post.author.user %}
+    <div class="post-actions">
+        <a href="{% url 'blog:edit-post' post.pk %}" class="edit-button">Edit</a>
+        <a href="{% url 'blog:delete-post' post.pk %}" class="delete-button" onclick="return confirm('Are you sure you want to delete this post?');">Delete</a>
+    </div>
+{% endif %}
+
+<h3>Comments:</h3>
+{% if post.comments.all %}
+    <ul class="comments-list">
+        {% for comment in post.comments.all %}
+            <li class="comment">
+                <div class="comment-header">
+                    <strong>{{ comment.author.user.username }}</strong>
+                    <span class="comment-date">{{ comment.created_at|date:"F d, Y H:i" }}</span>
+                </div>
+                <div class="comment-content">
+                    {{ comment.content }}
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No comments yet.</p>
+{% endif %}
+
+{% if user.is_authenticated %}
+    <div class="comment-form">
+        <h4>Add a Comment</h4>
+        <form method="post" action="{% url 'blog:add-comment' post.pk %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <textarea name="content" required class="comment-textarea" placeholder="Write your comment here..."></textarea>
+            </div>
+            <button type="submit" class="submit-button">Add Comment</button>
+        </form>
+    </div>
+{% else %}
+    <p><a href="{% url 'blog:login' %}">Log in</a> to add a comment.</p>
+{% endif %}
+
+<a href="{% url 'blog:blog-list' %}" class="back-link">← Back to all blogs</a>
+
+{% endblock %}

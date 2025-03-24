@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="author-profile">
+    <h2>{{ author.user.username }}'s Profile</h2>
+    <div class="author-bio">
+        <h3>About</h3>
+        <p>{{ author.bio|default:"No bio available." }}</p>
+    </div>
+
+    <div class="author-blogs">
+        <h3>Blog Posts by {{ author.user.username }}</h3>
+        {% if blog_posts %}
+            <div class="blog-list">
+                {% for post in blog_posts %}
+                    <div class="blog-card">
+                        <h4 class="blog-title">
+                            <a href="{% url 'blog:blog-detail' post.pk %}">{{ post.title }}</a>
+                        </h4>
+                        <div class="blog-meta">
+                            Posted on {{ post.post_date|date:"F d, Y" }}
+                        </div>
+                        <div class="blog-excerpt">
+                            {{ post.content|truncatewords:30 }}
+                        </div>
+                        <a href="{% url 'blog:blog-detail' post.pk %}" class="read-more">Read More →</a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="no-posts">No blog posts yet.</p>
+        {% endif %}
+    </div>
+
+    <div class="navigation">
+        <a href="{% url 'blog:author-list' %}" class="back-link">← Back to Authors List</a>
+    </div>
+</div>
+{% endblock %}
