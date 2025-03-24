@@ -41,7 +41,7 @@ ENV/
 .DS_Store
 
 # Project specific
-staticfiles/
+
 .coverage
 htmlcov/
 
