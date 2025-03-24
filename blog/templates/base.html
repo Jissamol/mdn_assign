@@ -44,7 +44,7 @@
                 </div>
             {% else %}
                 <div class="auth-links">
-                    <a href="{% url 'blog:login' %}?next={{ request.path }}">Login</a>
+                    <a href="{% url 'login' %}?next={{ request.path }}">Login</a>
                     <a href="{% url 'password_reset' %}">Reset Password</a>
                 </div>
             {% endif %}
